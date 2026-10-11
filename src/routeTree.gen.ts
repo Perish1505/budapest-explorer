@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CyclingToursRouteImport } from './routes/cycling-tours'
+import { Route as WalkingToursRouteImport } from './routes/walking-tours'
+import { Route as ToursIndexRouteImport } from './routes/tours.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CyclingToursRoute = CyclingToursRouteImport.update({
+  id: '/cycling-tours',
+  path: '/cycling-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WalkingToursRoute = WalkingToursRouteImport.update({
+  id: '/walking-tours',
+  path: '/walking-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursIndexRoute = ToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cycling-tours': typeof CyclingToursRoute
+  '/walking-tours': typeof WalkingToursRoute
+  '/tours/': typeof ToursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cycling-tours': typeof CyclingToursRoute
+  '/walking-tours': typeof WalkingToursRoute
+  '/tours': typeof ToursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cycling-tours': typeof CyclingToursRoute
+  '/walking-tours': typeof WalkingToursRoute
+  '/tours/': typeof ToursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cycling-tours' | '/walking-tours' | '/tours/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cycling-tours' | '/walking-tours' | '/tours'
+  id: '__root__' | '/' | '/cycling-tours' | '/walking-tours' | '/tours/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CyclingToursRoute: typeof CyclingToursRoute
+  WalkingToursRoute: typeof WalkingToursRoute
+  ToursIndexRoute: typeof ToursIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cycling-tours': {
+      id: '/cycling-tours'
+      path: '/cycling-tours'
+      fullPath: '/cycling-tours'
+      preLoaderRoute: typeof CyclingToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/walking-tours': {
+      id: '/walking-tours'
+      path: '/walking-tours'
+      fullPath: '/walking-tours'
+      preLoaderRoute: typeof WalkingToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/': {
+      id: '/tours/'
+      path: '/tours'
+      fullPath: '/tours/'
+      preLoaderRoute: typeof ToursIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CyclingToursRoute: CyclingToursRoute,
+  WalkingToursRoute: WalkingToursRoute,
+  ToursIndexRoute: ToursIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

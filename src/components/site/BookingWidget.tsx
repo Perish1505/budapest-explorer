@@ -75,7 +75,7 @@ export function BookingWidget({ tour }: { tour: Tour }) {
   }, [deps, tour.id, user]);
 
   useEffect(() => {
-    if (times.length && !times.some((t) => t.id === depId)) setDepId(times[0].id);
+    if (times.length && !times.some((t) => t.id === depId)) setDepId(times[0]!.id);
   }, [day]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function BookingWidget({ tour }: { tour: Tour }) {
   }, [maxPeople]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const start = () => {
-    if (!dep) return toast.error("Please choose a date and time");
+    if (!dep) { toast.error("Please choose a date and time"); return; }
     if (!user) {
       sessionStorage.setItem(PENDING_KEY, JSON.stringify({ tourId: tour.id, depId, adults, children }));
       toast.info("Please sign in to finish your booking. Your selection is saved.");
@@ -103,7 +103,7 @@ export function BookingWidget({ tour }: { tour: Tour }) {
       _departure_id: dep.id,
       _adults: adults,
       _children: children,
-      _notes: notes.trim().slice(0, 500) || undefined,
+      ...(notes.trim() ? { _notes: notes.trim().slice(0, 500) } : {}),
     });
     setBusy(false);
     if (error) {

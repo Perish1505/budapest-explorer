@@ -11,10 +11,10 @@ import { TourCard } from "./TourCard";
 import { toursQuery } from "@/lib/tours";
 
 export type CatalogFilters = {
-  type?: "walking" | "cycling";
-  date?: string;
-  people?: number;
-  q?: string;
+  type?: "walking" | "cycling" | undefined;
+  date?: string | undefined;
+  people?: number | undefined;
+  q?: string | undefined;
 };
 
 const PAGE = 6;
@@ -87,7 +87,7 @@ export function TourCatalog({ initial, lockType }: { initial: CatalogFilters; lo
           <Input type="date" value={date} min={new Date().toISOString().slice(0, 10)} onChange={(e) => setDate(e.target.value)} />
         </Field>
         <Field label={`Max price: €${maxPrice}`}>
-          <Slider min={10} max={80} step={5} value={[maxPrice]} onValueChange={(v) => setMaxPrice(v[0])} />
+          <Slider min={10} max={80} step={5} value={[maxPrice]} onValueChange={(v) => setMaxPrice(v[0] ?? 80)} />
         </Field>
         <Field label="Duration">
           <Select value={duration} onValueChange={setDuration}>

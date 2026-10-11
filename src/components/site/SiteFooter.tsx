@@ -17,11 +17,11 @@ function Newsletter() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = schema.safeParse({ email, consent });
-    if (!parsed.success) return toast.error(parsed.error.issues[0].message);
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid input"); return; }
     setBusy(true);
     const { error } = await supabase.from("newsletter_subscribers").insert({ email: parsed.data.email, consent: true });
     setBusy(false);
-    if (error && error.code !== "23505") return toast.error("Could not subscribe, please try again.");
+    if (error && error.code !== "23505") { toast.error("Could not subscribe, please try again."); return; }
     toast.success("Thanks! You're on the list.");
     setEmail("");
     setConsent(false);

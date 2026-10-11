@@ -54,11 +54,11 @@ function FavoriteButton({ tourId }: { tourId: string }) {
     },
   });
   const toggle = async () => {
-    if (!user) return toast.info("Sign in to save favourites");
+    if (!user) { toast.info("Sign in to save favourites"); return; }
     const { error } = fav
       ? await supabase.from("favorites").delete().eq("tour_id", tourId).eq("user_id", user.id)
       : await supabase.from("favorites").insert({ tour_id: tourId, user_id: user.id });
-    if (error) return toast.error("Could not update favourites");
+    if (error) { toast.error("Could not update favourites"); return; }
     toast.success(fav ? "Removed from favourites" : "Saved to favourites");
     qc.invalidateQueries({ queryKey: ["favorite"] });
     qc.invalidateQueries({ queryKey: ["favorites"] });

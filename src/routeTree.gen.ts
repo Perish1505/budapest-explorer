@@ -11,14 +11,23 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CyclingToursRouteImport } from './routes/cycling-tours'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WalkingToursRouteImport } from './routes/walking-tours'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursSlugRouteImport } from './routes/tours.$slug'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
 import { Route as AuthenticatedBookingConfirmationReferenceRouteImport } from './routes/_authenticated/booking.confirmation.$reference'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,9 +39,29 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
+  id: '/cancellation-policy',
+  path: '/cancellation-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CyclingToursRoute = CyclingToursRouteImport.update({
   id: '/cycling-tours',
   path: '/cycling-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -45,6 +74,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -55,10 +89,20 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WalkingToursRoute = WalkingToursRouteImport.update({
   id: '/walking-tours',
   path: '/walking-tours',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ToursIndexRoute = ToursIndexRouteImport.update({
   id: '/tours/',
@@ -70,6 +114,18 @@ const ToursSlugRoute = ToursSlugRouteImport.update({
   path: '/tours/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardProfileRoute =
+  AuthenticatedDashboardProfileRouteImport.update({
+    id: '/dashboard/profile',
+    path: '/dashboard/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedBookingConfirmationReferenceRoute =
   AuthenticatedBookingConfirmationReferenceRouteImport.update({
     id: '/booking/confirmation/$reference',
@@ -79,90 +135,150 @@ const AuthenticatedBookingConfirmationReferenceRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
+  '/contact': typeof ContactRoute
   '/cycling-tours': typeof CyclingToursRoute
+  '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
   '/walking-tours': typeof WalkingToursRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/tours/$slug': typeof ToursSlugRoute
   '/tours/': typeof ToursIndexRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/booking/confirmation/$reference': typeof AuthenticatedBookingConfirmationReferenceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
+  '/contact': typeof ContactRoute
   '/cycling-tours': typeof CyclingToursRoute
+  '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
   '/walking-tours': typeof WalkingToursRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/tours/$slug': typeof ToursSlugRoute
   '/tours': typeof ToursIndexRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/booking/confirmation/$reference': typeof AuthenticatedBookingConfirmationReferenceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
+  '/contact': typeof ContactRoute
   '/cycling-tours': typeof CyclingToursRoute
+  '/faq': typeof FaqRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
   '/walking-tours': typeof WalkingToursRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/tours/$slug': typeof ToursSlugRoute
   '/tours/': typeof ToursIndexRoute
+  '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/booking/confirmation/$reference': typeof AuthenticatedBookingConfirmationReferenceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/cancellation-policy'
+    | '/contact'
     | '/cycling-tours'
+    | '/faq'
     | '/forgot-password'
     | '/login'
+    | '/privacy'
     | '/register'
     | '/reset-password'
+    | '/terms'
     | '/walking-tours'
+    | '/admin'
     | '/tours/$slug'
     | '/tours/'
+    | '/dashboard/profile'
+    | '/dashboard/'
     | '/booking/confirmation/$reference'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/cancellation-policy'
+    | '/contact'
     | '/cycling-tours'
+    | '/faq'
     | '/forgot-password'
     | '/login'
+    | '/privacy'
     | '/register'
     | '/reset-password'
+    | '/terms'
     | '/walking-tours'
+    | '/admin'
     | '/tours/$slug'
     | '/tours'
+    | '/dashboard/profile'
+    | '/dashboard'
     | '/booking/confirmation/$reference'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/about'
+    | '/cancellation-policy'
+    | '/contact'
     | '/cycling-tours'
+    | '/faq'
     | '/forgot-password'
     | '/login'
+    | '/privacy'
     | '/register'
     | '/reset-password'
+    | '/terms'
     | '/walking-tours'
+    | '/_authenticated/admin'
     | '/tours/$slug'
     | '/tours/'
+    | '/_authenticated/dashboard/profile'
+    | '/_authenticated/dashboard/'
     | '/_authenticated/booking/confirmation/$reference'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  CancellationPolicyRoute: typeof CancellationPolicyRoute
+  ContactRoute: typeof ContactRoute
   CyclingToursRoute: typeof CyclingToursRoute
+  FaqRoute: typeof FaqRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  PrivacyRoute: typeof PrivacyRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  TermsRoute: typeof TermsRoute
   WalkingToursRoute: typeof WalkingToursRoute
   ToursSlugRoute: typeof ToursSlugRoute
   ToursIndexRoute: typeof ToursIndexRoute
@@ -184,11 +300,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cancellation-policy': {
+      id: '/cancellation-policy'
+      path: '/cancellation-policy'
+      fullPath: '/cancellation-policy'
+      preLoaderRoute: typeof CancellationPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cycling-tours': {
       id: '/cycling-tours'
       path: '/cycling-tours'
       fullPath: '/cycling-tours'
       preLoaderRoute: typeof CyclingToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -205,6 +349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -219,12 +370,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/walking-tours': {
       id: '/walking-tours'
       path: '/walking-tours'
       fullPath: '/walking-tours'
       preLoaderRoute: typeof WalkingToursRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/tours/': {
       id: '/tours/'
@@ -240,6 +405,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToursSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/profile': {
+      id: '/_authenticated/dashboard/profile'
+      path: '/dashboard/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof AuthenticatedDashboardProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/booking/confirmation/$reference': {
       id: '/_authenticated/booking/confirmation/$reference'
       path: '/booking/confirmation/$reference'
@@ -251,10 +430,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedDashboardProfileRoute: typeof AuthenticatedDashboardProfileRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedBookingConfirmationReferenceRoute: typeof AuthenticatedBookingConfirmationReferenceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedDashboardProfileRoute: AuthenticatedDashboardProfileRoute,
+  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedBookingConfirmationReferenceRoute:
     AuthenticatedBookingConfirmationReferenceRoute,
 }
@@ -265,11 +450,17 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
+  CancellationPolicyRoute: CancellationPolicyRoute,
+  ContactRoute: ContactRoute,
   CyclingToursRoute: CyclingToursRoute,
+  FaqRoute: FaqRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  PrivacyRoute: PrivacyRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  TermsRoute: TermsRoute,
   WalkingToursRoute: WalkingToursRoute,
   ToursSlugRoute: ToursSlugRoute,
   ToursIndexRoute: ToursIndexRoute,

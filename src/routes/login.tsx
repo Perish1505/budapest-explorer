@@ -62,7 +62,7 @@ function Login() {
         <div>
           <Label htmlFor="email">Email</Label>
           <Input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <FieldError msg={errors.email} />
+          <FieldError msg={errors["email"]} />
         </div>
         <div>
           <div className="flex items-center justify-between">
@@ -75,7 +75,7 @@ function Login() {
               {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
-          <FieldError msg={errors.password} />
+          <FieldError msg={errors["password"]} />
         </div>
         <Button type="submit" className="w-full" size="lg" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</Button>
       </form>

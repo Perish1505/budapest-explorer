@@ -85,15 +85,15 @@ function Register() {
   return (
     <AuthCard title="Create your account" subtitle="Book tours and keep all your reservations in one place.">
       <form onSubmit={submit} className="space-y-4" noValidate>
-        <div><Label htmlFor="n">Full name</Label><Input id="n" value={f.fullName} onChange={set("fullName")} /><FieldError msg={errors.fullName} /></div>
-        <div><Label htmlFor="e">Email</Label><Input id="e" type="email" value={f.email} onChange={set("email")} /><FieldError msg={errors.email} /></div>
-        <div><Label htmlFor="p">Password</Label><Input id="p" type="password" autoComplete="new-password" value={f.password} onChange={set("password")} /><FieldError msg={errors.password} /></div>
-        <div><Label htmlFor="c">Confirm password</Label><Input id="c" type="password" autoComplete="new-password" value={f.confirm} onChange={set("confirm")} /><FieldError msg={errors.confirm} /></div>
+        <div><Label htmlFor="n">Full name</Label><Input id="n" value={f.fullName} onChange={set("fullName")} /><FieldError msg={errors["fullName"]} /></div>
+        <div><Label htmlFor="e">Email</Label><Input id="e" type="email" value={f.email} onChange={set("email")} /><FieldError msg={errors["email"]} /></div>
+        <div><Label htmlFor="p">Password</Label><Input id="p" type="password" autoComplete="new-password" value={f.password} onChange={set("password")} /><FieldError msg={errors["password"]} /></div>
+        <div><Label htmlFor="c">Confirm password</Label><Input id="c" type="password" autoComplete="new-password" value={f.confirm} onChange={set("confirm")} /><FieldError msg={errors["confirm"]} /></div>
         <label className="flex items-start gap-2 text-sm">
           <Checkbox checked={f.terms} onCheckedChange={(v) => setF({ ...f, terms: v === true })} className="mt-0.5" />
           <span>I accept the <Link to="/terms" className="text-primary underline">Terms & Conditions</Link></span>
         </label>
-        <FieldError msg={errors.terms} />
+        <FieldError msg={errors["terms"]} />
         <label className="flex items-start gap-2 text-sm text-muted-foreground">
           <Checkbox checked={f.newsletter} onCheckedChange={(v) => setF({ ...f, newsletter: v === true })} className="mt-0.5" />
           Send me occasional news and offers (optional)

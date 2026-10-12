@@ -68,7 +68,7 @@ function Dashboard() {
     if (comment.trim().length > 2000) { toast.error("Review is too long"); return; }
     const { error } = await supabase.from("reviews").insert({
       booking_id: reviewFor.id, tour_id: reviewFor.tourId, user_id: user.id, rating, comment: comment.trim(),
-      author_name: (user.user_metadata?.full_name as string | undefined)?.split(" ")[0] ?? null,
+      author_name: (user.user_metadata?.["full_name"] as string | undefined)?.split(" ")[0] ?? null,
     });
     if (error) { toast.error("Could not save your review"); return; }
     toast.success("Thanks for your review!");
@@ -81,7 +81,7 @@ function Dashboard() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="eyebrow">My dashboard</div>
-          <h1 className="mt-2 text-4xl font-semibold text-primary">Hello{user?.user_metadata?.full_name ? `, ${String(user.user_metadata.full_name).split(" ")[0]}` : ""}!</h1>
+          <h1 className="mt-2 text-4xl font-semibold text-primary">Hello{user?.user_metadata?.["full_name"] ? `, ${String(user.user_metadata["full_name"]).split(" ")[0]}` : ""}!</h1>
         </div>
         <Button asChild variant="outline"><Link to="/dashboard/profile">Profile settings</Link></Button>
       </div>
